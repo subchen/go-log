@@ -1,8 +1,8 @@
-log
+go-log
 ================
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/subchen/gstack/log)](https://goreportcard.com/report/github.com/subchen/gstack/log)
-[![GoDoc](https://godoc.org/github.com/subchen/gstack/log?status.svg)](https://godoc.org/github.com/subchen/gstack/log)
+[![Go Report Card](https://goreportcard.com/badge/github.com/subchen/go-log)](https://goreportcard.com/report/github.com/subchen/go-log)
+[![GoDoc](https://godoc.org/github.com/subchen/go-log?status.svg)](https://godoc.org/github.com/subchen/go-log)
 
 Logging package similar to log4j for the Golang.
 
@@ -18,7 +18,7 @@ Installation
 ---------------
 
 ```bash
-$ go get github.com/subchen/gstack/log
+$ go get github.com/subchen/go-log
 ```
 
 Usage
@@ -28,7 +28,7 @@ Usage
 
 ```go
 import (
-    "github.com/subchen/gstack/log"
+    "github.com/subchen/go-log"
 )
 
 func main() {
@@ -47,7 +47,7 @@ func main() {
 
 ```go
 import (
-    "github.com/subchen/gstack/log"
+    "github.com/subchen/go-log"
 )
 
 func main() {
@@ -98,7 +98,7 @@ func main() {
 
 ```go
 import (
-    "github.com/subchen/gstack/log"
+    "github.com/subchen/go-log"
 )
 
 func main() {
@@ -116,7 +116,7 @@ You can use `log.Fatal(...)` to output full stack
 
 ```
 21:04:32.884 main FATAL logger_test.go:24 this is a fatal message
-	at /go/src/github.com/subchen/gstack/log/logger_test.go:24 (0x81db3)
+	at /go/src/github.com/subchen/go-log/logger_test.go:24 (0x81db3)
 	at /usr/local/Cellar/go/1.5.2/libexec/src/testing/testing.go:456 (0x786c8)
 	at /usr/local/Cellar/go/1.5.2/libexec/src/runtime/asm_amd64.s:1721 (0x59641)
 ```
@@ -136,4 +136,4 @@ You can use `log.Fatal(...)` to output full stack
 
 ### API on godoc.org
 
-https://godoc.org/github.com/subchen/gstack/log
+https://godoc.org/github.com/subchen/go-log
