@@ -2,14 +2,20 @@ package log
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
+	"sort"
+	"strings"
 	"time"
 )
 
 // AlwaysNewFileWriter create new log for every process
 type AlwaysNewFileWriter struct {
-	Name string
+	Name     string
+	MaxCount int
+
 	file *os.File
 }
 
@@ -38,5 +44,38 @@ func (w *AlwaysNewFileWriter) openFile() (err error) {
 		return err
 	}
 
+	if w.MaxCount > 0 {
+		go w.cleanFiles()
+	}
+
 	return nil
+}
+
+// clean old files
+func (w *AlwaysNewFileWriter) cleanFiles() {
+	dir := path.Dir(w.Name)
+
+	fileList, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return
+	}
+
+	prefix := path.Base(w.Name) + "."
+
+	var matches []string
+	for _, f := range fileList {
+		if !f.IsDir() && strings.HasPrefix(f.Name(), prefix) {
+			matches = append(matches, f.Name())
+		}
+	}
+
+	if len(matches) > w.MaxCount {
+		sort.Sort(sort.Reverse(sort.StringSlice(matches)))
+		fmt.Println(matches)
+
+		for _, f := range matches[w.MaxCount:] {
+			file := filepath.Join(dir, f)
+			os.Remove(file)
+		}
+	}
 }
