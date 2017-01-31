@@ -27,16 +27,20 @@ Usage
 ### Default log to console
 
 ```go
+package main
+
 import (
+    "os"
+    "errors"
     "github.com/subchen/go-log"
 )
 
 func main() {
-    log.Debug("Some Message ...")
-    log.Error("error = %v", errors.New("some error"))
+    log.Debugf("app = %s", os.Args[0])
+    log.Errorf("error = %v", errors.New("some error"))
 
     // dynamic set level
-    log.SetLevel(log.INFO)
+    log.SetLevel(log.L_INFO)
 
     log.Debug("cannot output debug message")
     log.Info("can output info message")
@@ -45,23 +49,17 @@ func main() {
 
 ### Output to file
 
+You can call `SetWriter` to set a file writer into log.
+
 ```go
-import (
-    "github.com/subchen/go-log"
-)
-
-func main() {
-    log.SetWriter(&log.FixedSizeFileWriter{
-        Name:     "/tmp/test.log",
-        MaxSize:  10 * 1024 * 1024, // 10m
-        MaxCount: 10,
-    })
-
-    log.Debug("x = %v", "123")
-}
+log.SetWriter(&log.FixedSizeFileWriter{
+    Name:     "/tmp/test.log",
+    MaxSize:  10 * 1024 * 1024, // 10m
+    MaxCount: 10,
+})
 ```
 
-### We have four writers for use
+### We defined three writers for use
 
 ```go
 // Create log file if file size large than fixed size (10m)
@@ -73,25 +71,28 @@ func main() {
 }
 
 // Create log file every day.
-// files: /tmp/test.log.2016-01-02
+// files: /tmp/test.log.20160102
 &log.DailyFileWriter{
     Name: "/tmp/test.log",
+    MaxCount: 10,
 }
 
 // Create log file every process.
 // files: /tmp/test.log.20160102_150405
 &log.AlwaysNewFileWriter{
     Name: "/tmp/test.log",
+    MaxCount: 10,
 }
 
 // Output to multiple writes
-&log.CompositeWriters{
+io.MultiWriter(
     os.Stdout,
     &log.DailyFileWriter{
         Name: "/tmp/test.log",
+        MaxCount: 10,
     }
     //...
-}
+)
 ```
 
 ### New log instance
@@ -106,13 +107,13 @@ func main() {
         Name: "/tmp/test.log",
     })
 
-    logger.Debug("i = %d", 99)
+    logger.Debugf("i = %d", 99)
 }
 ```
 
 ### Output stack
 
-You can use `log.Fatal(...)` to output full stack
+You can use `log.Fatal(...)` or `log.Fatalf(...)` to output full stack
 
 ```
 21:04:32.884 main FATAL logger_test.go:24 this is a fatal message
@@ -128,11 +129,9 @@ You can use `log.Fatal(...)` to output full stack
 2016-02-10 19:33:02.587 12345 main 987 INFO fixed_size_file_writer_test.go:16 message ...
 ```
 
-* `log.SetTimeLayout("2006-01-02 15:04:05.999")` customize time format
-* `log.SetName("main")` add a name in log for indicate process
-* `log.EnableGoroutineId(true)` to output goroutine id
-* `log.EnableLongFileFormat(true)` to output long file name
-* `log.EnableColorizedLevel(true)` to output colorful message to console
+* `log.SetTimeFormat("2006-01-02 15:04:05.999")` customize time format
+* `log.SetAppName("main")` add a name in log for indicate process
+* `log.SetFlags(F_TIME | F_LONG_FILE | F_SHORT_FILE | F_PID | F_GID | F_COLOR)` to control what's printed
 
 ### API on godoc.org
 
