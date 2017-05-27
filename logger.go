@@ -34,7 +34,7 @@ const (
 	DEFAULT_FLAGS = F_TIME | F_SHORT_FILE | F_PID
 
 	// default time format
-	DEFAULT_TIME_FORMAT = "2006-01-02 15:04:05,000"
+	DEFAULT_TIME_FORMAT = "2006-01-02 15:04:05.000"
 )
 
 var (
