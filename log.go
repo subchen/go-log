@@ -92,6 +92,11 @@ func IsErrorEnabled() bool {
 	return std.IsErrorEnabled()
 }
 
+// Indicate whether output fatal message
+func IsFatalEnabled() bool {
+	return std.IsFatalEnabled()
+}
+
 // Output a debug message
 func Debug(obj ...interface{}) {
 	std.Debug(obj...)

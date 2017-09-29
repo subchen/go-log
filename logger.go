@@ -21,6 +21,7 @@ const (
 	L_WARN
 	L_ERROR
 	L_FATAL
+	L_OFF
 
 	// Bits or'ed together to control what's printed.
 	F_TIME = 1 << iota
@@ -44,6 +45,7 @@ var (
 		"WARN",
 		"ERROR",
 		"FATAL",
+		"OFF",
 	}
 	levelStrWithColor = []string{
 		"\033[34mDEBUG\033[0m",
@@ -51,6 +53,7 @@ var (
 		"\033[33mWARN\033[0m",
 		"\033[31mERROR\033[0m",
 		"\033[35mFATAL\033[0m",
+		"OFF",
 	}
 
 	buffer = sync.Pool{
@@ -177,6 +180,10 @@ func (l *Logger) IsErrorEnabled() bool {
 	return l.level <= L_ERROR
 }
 
+func (l *Logger) IsFatalEnabled() bool {
+	return l.level <= L_FATAL
+}
+
 func (l *Logger) Debug(obj ...interface{}) {
 	if l.level <= L_DEBUG {
 		l.log(L_DEBUG, fmt.Sprint(obj...))
@@ -232,7 +239,9 @@ func (l *Logger) Errorf(msg string, args ...interface{}) {
 }
 
 func (l *Logger) Fatalf(msg string, args ...interface{}) {
-	l.log(L_FATAL, fmt.Sprintf(msg, args...))
+	if l.level <= L_FATAL {
+		l.log(L_FATAL, fmt.Sprintf(msg, args...))
+	}
 }
 
 func (l *Logger) log(level int, msg string) {
