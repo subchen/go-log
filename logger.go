@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/subchen/gstack/gls"
+	"github.com/subchen/gls"
 )
 
 const (
