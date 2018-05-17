@@ -7,6 +7,8 @@ import (
 	"sync"
 )
 
+var Exit = os.Exit
+
 type Logger struct {
 	m         sync.Mutex
 	Level     Level
@@ -87,7 +89,7 @@ func (l *Logger) Fatal(obj ...interface{}) {
 	if l.Level >= FATAL {
 		l.log(FATAL, fmt.Sprint(obj...))
 	}
-	os.Exit(1)
+	Exit(1)
 }
 
 func (l *Logger) Debugln(obj ...interface{}) {
@@ -131,7 +133,7 @@ func (l *Logger) Fatalln(obj ...interface{}) {
 	if l.Level >= FATAL {
 		l.log(FATAL, vsprintln(obj...))
 	}
-	os.Exit(1)
+	Exit(1)
 }
 
 func (l *Logger) Debugf(msg string, args ...interface{}) {
@@ -175,7 +177,7 @@ func (l *Logger) Fatalf(msg string, args ...interface{}) {
 	if l.Level >= FATAL {
 		l.log(FATAL, fmt.Sprintf(msg, args...))
 	}
-	os.Exit(1)
+	Exit(1)
 }
 
 func (l *Logger) log(level Level, msg string) {
