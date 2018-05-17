@@ -1,148 +1,139 @@
-// Package log implements a common logging like log4j.
 package log
 
-import (
-	"io"
-	"os"
-
-	"github.com/mattn/go-isatty"
-)
-
-// std is a default logger for console
-var std = New(os.Stdout).SkipCaller(3)
-
-func init() {
-	if isatty.IsTerminal(os.Stdout.Fd()) {
-		std.SetFlags(DEFAULT_FLAGS | F_COLOR)
-	}
-}
-
-// Get log level
-func GetLevel() int {
-	return std.GetLevel()
-}
-
-// Set log level
-func SetLevel(level int) {
-	std.SetLevel(level)
-}
-
-// Get log level name
-func GetLevelName() string {
-	return std.GetLevelName()
-}
-
-// Set log level name
-func SetLevelName(level string) {
-	std.SetLevelName(level)
-}
-
-// Get the flags for output format
-func GetFlags() int {
-	return std.GetFlags()
-}
-
-// Set flags for output format
-func SetFlags(flags int) {
-	std.SetFlags(flags)
-}
-
-// Get the process name
-func GetAppName() string {
-	return std.GetAppName()
-}
-
-// Set a process name
-func SetAppName(name string) {
-	std.SetAppName(name)
-}
-
-// Get time format for log line
-func GetTimeFormat() string {
-	return std.GetTimeFormat()
-}
-
-// Set time format for log line
-func SetTimeFormat(format string) {
-	std.SetTimeFormat(format)
-}
-
-// Set a writer
-func SetWriter(w io.Writer) {
-	std.SetWriter(w)
-}
+// Default is a default Logger instance
+var Default = New()
 
 // Indicate whether output debug message
 func IsDebugEnabled() bool {
-	return std.IsDebugEnabled()
+	return Default.IsDebugEnabled()
 }
 
 // Indicate whether output info message
 func IsInfoEnabled() bool {
-	return std.IsInfoEnabled()
+	return Default.IsInfoEnabled()
 }
 
 // Indicate whether output warning message
 func IsWarnEnabled() bool {
-	return std.IsWarnEnabled()
+	return Default.IsWarnEnabled()
 }
 
 // Indicate whether output error message
 func IsErrorEnabled() bool {
-	return std.IsErrorEnabled()
+	return Default.IsErrorEnabled()
 }
 
 // Indicate whether output fatal message
 func IsFatalEnabled() bool {
-	return std.IsFatalEnabled()
+	return Default.IsFatalEnabled()
+}
+
+// Indicate whether output is off
+func IsDisabled() bool {
+	return Default.IsDisabled()
 }
 
 // Output a debug message
 func Debug(obj ...interface{}) {
-	std.Debug(obj...)
+	Default.Debug(obj...)
 }
 
 // Output an info message
 func Info(obj ...interface{}) {
-	std.Info(obj...)
+	Default.Info(obj...)
+}
+
+// Output an info message
+func Print(obj ...interface{}) {
+	Default.Print(obj...)
 }
 
 // Output a warning message
 func Warn(obj ...interface{}) {
-	std.Warn(obj...)
+	Default.Warn(obj...)
 }
 
 // Output an error message
 func Error(obj ...interface{}) {
-	std.Error(obj...)
+	Default.Error(obj...)
+}
+
+// Output a panic message with full stack
+func Panic(obj ...interface{}) {
+	Default.Panic(obj...)
 }
 
 // Output a fatal message with full stack
 func Fatal(obj ...interface{}) {
-	std.Fatal(obj...)
+	Default.Fatal(obj...)
+}
+
+// Output a debug message
+func Debugln(obj ...interface{}) {
+	Default.Debugln(obj...)
+}
+
+// Output an info message
+func Infoln(obj ...interface{}) {
+	Default.Infoln(obj...)
+}
+
+// Output an info message
+func Println(obj ...interface{}) {
+	Default.Println(obj...)
+}
+
+// Output a warning message
+func Warnln(obj ...interface{}) {
+	Default.Warnln(obj...)
+}
+
+// Output an error message
+func Errorln(obj ...interface{}) {
+	Default.Errorln(obj...)
+}
+
+// Output a panic message with full stack
+func Panicln(obj ...interface{}) {
+	Default.Panicln(obj...)
+}
+
+// Output a fatal message with full stack
+func Fatalln(obj ...interface{}) {
+	Default.Fatalln(obj...)
 }
 
 // Output a debug message
 func Debugf(msg string, args ...interface{}) {
-	std.Debugf(msg, args...)
+	Default.Debugf(msg, args...)
 }
 
 // Output an info message
 func Infof(msg string, args ...interface{}) {
-	std.Infof(msg, args...)
+	Default.Infof(msg, args...)
+}
+
+// Output an info message
+func Printf(msg string, args ...interface{}) {
+	Default.Printf(msg, args...)
 }
 
 // Output a warning message
 func Warnf(msg string, args ...interface{}) {
-	std.Warnf(msg, args...)
+	Default.Warnf(msg, args...)
 }
 
 // Output an error message
 func Errorf(msg string, args ...interface{}) {
-	std.Errorf(msg, args...)
+	Default.Errorf(msg, args...)
+}
+
+// Output a panic message with full stack
+func Panicf(msg string, args ...interface{}) {
+	Default.Panicf(msg, args...)
 }
 
 // Output a fatal message with full stack
 func Fatalf(msg string, args ...interface{}) {
-	std.Fatalf(msg, args...)
+	Default.Fatalf(msg, args...)
 }

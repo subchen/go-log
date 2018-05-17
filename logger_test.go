@@ -1,39 +1,60 @@
 package log
 
 import (
-	"os"
-	"sync"
+	"bytes"
 	"testing"
 )
 
-func TestLogger(t *testing.T) {
-	stdout := New(os.Stdout)
-	stdout.SetTimeFormat("15:04:05.999")
-	stdout.SetAppName("main")
-	stdout.SetLevel(L_DEBUG)
-	stdout.SetFlags(DEFAULT_FLAGS | F_GID | F_COLOR)
+var hits int = 0
 
-	wg := sync.WaitGroup{}
-	for i := 0; i < 3; i++ {
-		wg.Add(1)
-		go func(i int) {
-			stdout.Debugf("i = %d", i)
-			stdout.Infof("i = %d", i)
-			wg.Done()
-		}(i)
+type hitsFormatter struct{}
+
+func (f *hitsFormatter) Format(level Level, msg string, logger *Logger) []byte {
+	hits++
+	return []byte(msg)
+}
+
+var l = &Logger{
+	Level:     DEBUG,
+	Formatter: new(hitsFormatter),
+	Out:       new(bytes.Buffer),
+}
+
+func reset() {
+	l.Level = DEBUG
+	hits = 0
+}
+
+func TestLogOnLevel(t *testing.T) {
+	tests := []struct {
+		level Level
+		fn    func(...interface{})
+		hits  int
+	}{
+		{level: DEBUG, fn: l.Debug, hits: 1},
+		{level: DEBUG, fn: l.Info, hits: 1},
+		{level: INFO, fn: l.Debug, hits: 0},
+		{level: INFO, fn: l.Info, hits: 1},
+		{level: WARN, fn: l.Debugln, hits: 0},
+		{level: WARN, fn: l.Infoln, hits: 0},
+		{level: WARN, fn: l.Println, hits: 1},
+		{level: WARN, fn: l.Errorln, hits: 1},
+		{level: ERROR, fn: l.Debug, hits: 0},
+		{level: ERROR, fn: l.Print, hits: 1},
+		{level: ERROR, fn: l.Error, hits: 1},
+		{level: OFF, fn: l.Debugln, hits: 0},
+		{level: OFF, fn: l.Println, hits: 0},
+		{level: OFF, fn: l.Errorln, hits: 0},
 	}
-	for i := 0; i < 3; i++ {
-		wg.Add(1)
-		go func(i int) {
-			stdout.Debugf("i = %d", i)
-			stdout.Infof("i = %d", i)
-			wg.Done()
-		}(i)
+
+	for i, tt := range tests {
+		l.Level = tt.level
+		hits = 0
+		
+		tt.fn("message")
+		
+		if hits != tt.hits {
+			t.Errorf("Case %d, fn hits on level %v, got %v, want %v", i, tt.level, hits, tt.hits)
+		}
 	}
-
-	wg.Wait()
-
-	stdout.Warn("warning", "message")
-	stdout.Error("error")
-	stdout.Fatal("fatal")
 }
