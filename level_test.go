@@ -1,6 +1,7 @@
 package log
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -22,6 +23,11 @@ func TestLevelToString(t *testing.T) {
 		got := tt.level.String()
 		if got != tt.wantOut {
 			t.Errorf("%v.String() output = %v, want %v", tt.level, got, tt.wantOut)
+		}
+
+		gotColor := tt.level.ColorString()
+		if !strings.Contains(gotColor, tt.wantOut) {
+			t.Errorf("%v.ColorString() output = %v, want %v", tt.level, gotColor, tt.wantOut)
 		}
 	}
 }

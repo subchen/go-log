@@ -32,6 +32,10 @@ func (l *Logger) IsInfoEnabled() bool {
 	return l.Level >= INFO
 }
 
+func (l *Logger) IsPrintEnabled() bool {
+	return l.Level > OFF
+}
+
 func (l *Logger) IsWarnEnabled() bool {
 	return l.Level >= WARN
 }
@@ -40,12 +44,16 @@ func (l *Logger) IsErrorEnabled() bool {
 	return l.Level >= ERROR
 }
 
+func (l *Logger) IsPanicEnabled() bool {
+	return l.Level >= PANIC
+}
+
 func (l *Logger) IsFatalEnabled() bool {
 	return l.Level >= FATAL
 }
 
 func (l *Logger) IsDisabled() bool {
-	return l.Level >= OFF
+	return l.Level <= OFF
 }
 
 func (l *Logger) Debug(obj ...interface{}) {

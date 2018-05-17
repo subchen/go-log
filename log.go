@@ -13,6 +13,11 @@ func IsInfoEnabled() bool {
 	return Default.IsInfoEnabled()
 }
 
+// Indicate whether output info message
+func IsPrintEnabled() bool {
+	return Default.IsPrintEnabled()
+}
+
 // Indicate whether output warning message
 func IsWarnEnabled() bool {
 	return Default.IsWarnEnabled()
@@ -21,6 +26,11 @@ func IsWarnEnabled() bool {
 // Indicate whether output error message
 func IsErrorEnabled() bool {
 	return Default.IsErrorEnabled()
+}
+
+// Indicate whether output panic message
+func IsPanicEnabled() bool {
+	return Default.IsPanicEnabled()
 }
 
 // Indicate whether output fatal message
