@@ -123,9 +123,9 @@ import (
 
 func main() {
 	logger := &log.Logger{
-		Level:	 log.INFO,
+		Level:     log.INFO,
 		Formatter: new(formatters.JSONFormatter),
-		Out:	   os.Stdout,
+		Out:       os.Stdout,
 	}
 
 	logger.Infof("i = %d", 99)
