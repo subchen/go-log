@@ -32,20 +32,20 @@ Usage
 package main
 
 import (
-    "os"
-    "errors"
-    "github.com/subchen/go-log"
+	"os"
+	"errors"
+	"github.com/subchen/go-log"
 )
 
 func main() {
-    log.Debugf("app = %s", os.Args[0])
-    log.Errorf("error = %v", errors.New("some error"))
+	log.Debugf("app = %s", os.Args[0])
+	log.Errorf("error = %v", errors.New("some error"))
 
-    // dynamic set level
-    log.Default.Level = log.DEBUG
+	// dynamic set level
+	log.Default.Level = log.DEBUG
 
-    log.Debug("cannot output debug message")
-    log.Infoln("can output info message")
+	log.Debug("cannot output debug message")
+	log.Infoln("can output info message")
 }
 ```
 
@@ -55,14 +55,14 @@ Default log to console, you can set `Logger.Out` to set a file writer into log.
 
 ```go
 import (
-    "github.com/subchen/go-log"
-    "github.com/subchen/go-log/writers"
+	"github.com/subchen/go-log"
+	"github.com/subchen/go-log/writers"
 )
 
 log.Default.Out = &writers.FixedSizeFileWriter{
-    Name:     "/tmp/test.log",
-    MaxSize:  10 * 1024 * 1024, // 10m
-    MaxCount: 10,
+	Name:	 "/tmp/test.log",
+	MaxSize:  10 * 1024 * 1024, // 10m
+	MaxCount: 10,
 })
 ```
 
@@ -72,33 +72,33 @@ Three builtin writers for use
 // Create log file if file size large than fixed size (10m)
 // files: /tmp/test.log.0 .. test.log.10
 &writers.FixedSizeFileWriter{
-    Name:     "/tmp/test.log",
-    MaxSize:  10 * 1024 * 1024, // 10m
-    MaxCount: 10,
+	Name:	 "/tmp/test.log",
+	MaxSize:  10 * 1024 * 1024, // 10m
+	MaxCount: 10,
 }
 
 // Create log file every day.
 // files: /tmp/test.log.20160102
 &writers.DailyFileWriter{
-    Name: "/tmp/test.log",
-    MaxCount: 10,
+	Name: "/tmp/test.log",
+	MaxCount: 10,
 }
 
 // Create log file every process.
 // files: /tmp/test.log.20160102_150405
 &writers.AlwaysNewFileWriter{
-    Name: "/tmp/test.log",
-    MaxCount: 10,
+	Name: "/tmp/test.log",
+	MaxCount: 10,
 }
 
 // Output to multiple writes
 io.MultiWriter(
-    os.Stdout,
-    &writers.DailyFileWriter{
-        Name: "/tmp/test.log",
-        MaxCount: 10,
-    }
-    //...
+	os.Stdout,
+	&writers.DailyFileWriter{
+		Name: "/tmp/test.log",
+		MaxCount: 10,
+	}
+	//...
 )
 ```
 
@@ -106,8 +106,8 @@ io.MultiWriter(
 
 ```go
 import (
-    "github.com/subchen/go-log"
-    "github.com/subchen/go-log/formatters"
+	"github.com/subchen/go-log"
+	"github.com/subchen/go-log/formatters"
 )
 
 log.Default.Formatter = new(formatters.TextFormatter)
@@ -118,17 +118,17 @@ log.Default.Formatter = new(formatters.TextFormatter)
 
 ```go
 import (
-    "github.com/subchen/go-log"
+	"github.com/subchen/go-log"
 )
 
 func main() {
-    logger := &log.Logger{
-		Level:     log.INFO,
+	logger := &log.Logger{
+		Level:	 log.INFO,
 		Formatter: new(formatters.JSONFormatter),
-		Out:       os.Stdout,
+		Out:	   os.Stdout,
 	}
 
-    logger.Infof("i = %d", 99)
+	logger.Infof("i = %d", 99)
 }
 ```
 
