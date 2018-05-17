@@ -1,6 +1,9 @@
 package formatters
 
 import (
+	"io"
+	"os"
+
 	"golang.org/x/crypto/ssh/terminal"
 )
 

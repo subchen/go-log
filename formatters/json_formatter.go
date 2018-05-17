@@ -52,11 +52,11 @@ func (f JSONFormatter) Format(level log.Level, msg string, logger *log.Logger) [
 	data["line"] = line
 	data["msg"] = msg
 
-	line, err := marshal(data)
+	serialized, err := marshal(data)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to marshal json, %v\n", err)
 	}
-	return line
+	return serialized
 }
 
 func marshal(v interface{}) ([]byte, error) {

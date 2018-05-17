@@ -107,7 +107,7 @@ func TestLogOnLevel(t *testing.T) {
 	for i, tt := range tests {
 		func() {
 			defer func() {
-			    // check panic hits
+				// check panic hits
 				if err := recover(); err != nil {
 					if !tt.fns.ispanic {
 						t.Errorf("Case %d, got panic", i)

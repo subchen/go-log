@@ -2,7 +2,6 @@ package formatters
 
 import (
 	"bytes"
-	"io"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -49,7 +48,7 @@ func (f TextFormatter) Format(level log.Level, msg string, logger *log.Logger) [
 
 		f.isterm = IsTerminal(logger.Out)
 
-		host, _ = os.Hostname()
+		host, _ := os.Hostname()
 		f.host = []byte(host)
 
 		f.pid = []byte(strconv.Itoa(os.Getpid()))
