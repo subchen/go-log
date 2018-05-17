@@ -24,7 +24,7 @@ func FilelineCaller(skip int) (file string, line int) {
 			}
 		}
 
-		if !strings.HasPrefix(file, "log/") {
+		if !strings.HasPrefix(file, "go-log/") {
 			return file, line
 		}
 	}

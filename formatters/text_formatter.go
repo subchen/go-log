@@ -83,14 +83,14 @@ func (f TextFormatter) Format(level log.Level, msg string, logger *log.Logger) [
 	buf.Write(f.pid)
 
 	// file, line
-	file, line := FilelineCaller(7)
+	file, line := FilelineCaller(5)
 	buf.WriteByte(' ')
 	buf.WriteString(file)
 	buf.WriteByte(':')
 	buf.WriteString(strconv.Itoa(line))
-	buf.WriteByte('"')
 
 	// msg
+	buf.WriteByte(' ')
 	buf.WriteString(msg)
 
 	// newline
