@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	logHits  int = 0
-	exitHits int = 0
+	logHits  int
+	exitHits int
 )
 
 type hitsFormatter struct{}
