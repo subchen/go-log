@@ -32,7 +32,7 @@ type TextFormatter struct {
 }
 
 // Format implements log.Formatter
-func (f TextFormatter) Format(level log.Level, msg string, logger *log.Logger) []byte {
+func (f *TextFormatter) Format(level log.Level, msg string, logger *log.Logger) []byte {
 	// output format: DATE LEVEL HOST APP PID file:line message
 	// 2001-10-10T12:00:00,000+0800 INFO web-1 app 1234 main/main.go:1234 message ...
 

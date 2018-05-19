@@ -23,7 +23,7 @@ type JSONFormatter struct {
 }
 
 // Format implements log.Formatter
-func (f JSONFormatter) Format(level log.Level, msg string, logger *log.Logger) []byte {
+func (f *JSONFormatter) Format(level log.Level, msg string, logger *log.Logger) []byte {
 	// output fields: time level host app pid file line msg
 
 	f.init.Do(func() {
