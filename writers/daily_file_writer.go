@@ -20,6 +20,7 @@ type DailyFileWriter struct {
 	nextDayTime int64
 }
 
+// Write implements io.Writer
 func (w *DailyFileWriter) Write(p []byte) (n int, err error) {
 	now := time.Now()
 

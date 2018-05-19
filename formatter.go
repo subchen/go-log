@@ -14,6 +14,7 @@ type Formatter interface {
 type simpleFormatter struct {
 }
 
+// Format implements log.Formatter
 func (f simpleFormatter) Format(level Level, msg string, logger *Logger) []byte {
 	time := time.Now().Format("15:04:05.000")
 	return []byte(fmt.Sprintf("%s %s %s\n", time, level.String(), msg))

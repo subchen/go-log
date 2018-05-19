@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// FilelineCaller returns file and line for caller
 func FilelineCaller(skip int) (file string, line int) {
 	for i := 0; i < 10; i++ {
 		_, file, line, ok := runtime.Caller(skip + i)

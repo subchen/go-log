@@ -17,6 +17,7 @@ type FixedSizeFileWriter struct {
 	currentSize int64
 }
 
+// Write implements io.Writer
 func (w *FixedSizeFileWriter) Write(p []byte) (n int, err error) {
 	if w.file == nil {
 		w.openCurrentFile()

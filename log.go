@@ -3,147 +3,147 @@ package log
 // Default is a default Logger instance
 var Default = New()
 
-// Indicate whether output debug message
+// IsDebugEnabled indicates whether output message
 func IsDebugEnabled() bool {
 	return Default.IsDebugEnabled()
 }
 
-// Indicate whether output info message
+// IsInfoEnabled indicates whether output message
 func IsInfoEnabled() bool {
 	return Default.IsInfoEnabled()
 }
 
-// Indicate whether output info message
+// IsPrintEnabled indicates whether output message
 func IsPrintEnabled() bool {
 	return Default.IsPrintEnabled()
 }
 
-// Indicate whether output warning message
+// IsWarnEnabled indicates whether output message
 func IsWarnEnabled() bool {
 	return Default.IsWarnEnabled()
 }
 
-// Indicate whether output error message
+// IsErrorEnabled indicates whether output message
 func IsErrorEnabled() bool {
 	return Default.IsErrorEnabled()
 }
 
-// Indicate whether output panic message
+// IsPanicEnabled indicates whether output message
 func IsPanicEnabled() bool {
 	return Default.IsPanicEnabled()
 }
 
-// Indicate whether output fatal message
+// IsFatalEnabled indicates whether output message
 func IsFatalEnabled() bool {
 	return Default.IsFatalEnabled()
 }
 
-// Indicate whether output is off
+// IsDisabled indicates whether output message
 func IsDisabled() bool {
 	return Default.IsDisabled()
 }
 
-// Output a debug message
+// Debug outputs message, Arguments are handled by fmt.Sprint
 func Debug(obj ...interface{}) {
 	Default.Debug(obj...)
 }
 
-// Output an info message
+// Info outputs message, Arguments are handled by fmt.Sprint
 func Info(obj ...interface{}) {
 	Default.Info(obj...)
 }
 
-// Output an info message
+// Print outputs message, Arguments are handled by fmt.Sprint
 func Print(obj ...interface{}) {
 	Default.Print(obj...)
 }
 
-// Output a warning message
+// Warn outputs message, Arguments are handled by fmt.Sprint
 func Warn(obj ...interface{}) {
 	Default.Warn(obj...)
 }
 
-// Output an error message
+// Error outputs message, Arguments are handled by fmt.Sprint
 func Error(obj ...interface{}) {
 	Default.Error(obj...)
 }
 
-// Output a panic message with full stack
+// Panic outputs message, and followed by a call to panic() Arguments are handled by fmt.Sprint
 func Panic(obj ...interface{}) {
 	Default.Panic(obj...)
 }
 
-// Output a fatal message with full stack
+// Fatal outputs message, and followed by a call to os.Exit(1) Arguments are handled by fmt.Sprint
 func Fatal(obj ...interface{}) {
 	Default.Fatal(obj...)
 }
 
-// Output a debug message
+// Debugln outputs message, Arguments are handled by fmt.Sprintln
 func Debugln(obj ...interface{}) {
 	Default.Debugln(obj...)
 }
 
-// Output an info message
+// Infoln outputs message, Arguments are handled by fmt.Sprintln
 func Infoln(obj ...interface{}) {
 	Default.Infoln(obj...)
 }
 
-// Output an info message
+// Println outputs message, Arguments are handled by fmt.Sprintln
 func Println(obj ...interface{}) {
 	Default.Println(obj...)
 }
 
-// Output a warning message
+// Warnln outputs message, Arguments are handled by fmt.Sprintln
 func Warnln(obj ...interface{}) {
 	Default.Warnln(obj...)
 }
 
-// Output an error message
+// Errorln outputs message, Arguments are handled by fmt.Sprintln
 func Errorln(obj ...interface{}) {
 	Default.Errorln(obj...)
 }
 
-// Output a panic message with full stack
+// Panicln outputs message and followed by a call to panic(), Arguments are handled by fmt.Sprintln
 func Panicln(obj ...interface{}) {
 	Default.Panicln(obj...)
 }
 
-// Output a fatal message with full stack
+// Fatalln outputs message and followed by a call to os.Exit(1), Arguments are handled by fmt.Sprintln
 func Fatalln(obj ...interface{}) {
 	Default.Fatalln(obj...)
 }
 
-// Output a debug message
+// Debugf outputs message, Arguments are handled by fmt.Sprintf
 func Debugf(msg string, args ...interface{}) {
 	Default.Debugf(msg, args...)
 }
 
-// Output an info message
+// Infof outputs message, Arguments are handled by fmt.Sprintf
 func Infof(msg string, args ...interface{}) {
 	Default.Infof(msg, args...)
 }
 
-// Output an info message
+// Printf outputs message, Arguments are handled by fmt.Sprintf
 func Printf(msg string, args ...interface{}) {
 	Default.Printf(msg, args...)
 }
 
-// Output a warning message
+// Warnf outputs message, Arguments are handled by fmt.Sprintf
 func Warnf(msg string, args ...interface{}) {
 	Default.Warnf(msg, args...)
 }
 
-// Output an error message
+// Errorf outputs message, Arguments are handled by fmt.Sprintf
 func Errorf(msg string, args ...interface{}) {
 	Default.Errorf(msg, args...)
 }
 
-// Output a panic message with full stack
+// Panicf outputs message and followed by a call to panic(), Arguments are handled by fmt.Sprintf
 func Panicf(msg string, args ...interface{}) {
 	Default.Panicf(msg, args...)
 }
 
-// Output a fatal message with full stack
+// Fatalf outputs message and followed by a call to os.Exit(1), Arguments are handled by fmt.Sprintf
 func Fatalf(msg string, args ...interface{}) {
 	Default.Fatalf(msg, args...)
 }
