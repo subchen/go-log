@@ -42,10 +42,10 @@ func main() {
 	log.Errorf("error = %v", errors.New("some error"))
 
 	// dynamic set level
-	log.Default.Level = log.DEBUG
+	log.Default.Level = log.WARN
 
 	log.Debug("cannot output debug message")
-	log.Infoln("can output info message")
+	log.Errorln("can output error message", errors.New("some error"))
 }
 ```
 
